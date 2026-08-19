@@ -1,5 +1,4 @@
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 from packages.review_operations import predict_sentiment
 import streamlit as st
