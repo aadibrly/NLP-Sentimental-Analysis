@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#00ff66"                # Bright toxic emerald
+backgroundColor = "#141a15"            # Deep void black
+secondaryBackgroundColor = "#546256"    # Dark muted moss
+textColor = "#f0f6f0"                   # Crisp clean white
+font = "sans serif"
