@@ -24,7 +24,7 @@ def load_rnn_model():
 
 model = load_rnn_model()
 
-# ================= SIDEBAR =================
+#SIDEBAR
 with st.sidebar:
     st.title("🎬 IMDb Sentiment Analyzer")
     st.markdown("---")
