@@ -142,7 +142,7 @@ if st.session_state.history:
 else:
     st.info("Submit a review above to see the sentiment analysis result.")
 
-# RECENT REVIEWS HISTORY
+# recent review history
 st.markdown("---")
 st.markdown('<a name="recent-reviews"></a>', unsafe_allow_html=True)
 st.subheader("🕒 Recent Reviews")
