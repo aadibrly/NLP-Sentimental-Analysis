@@ -55,7 +55,7 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Made with ❤️ using Streamlit")
 
-# ================= MAIN SECTION =================
+#MAIN SECTION
 st.title("IMDb Movie review Sentiment Analysis")
 st.write("Enter a movie review to classify it as **Positive** or **Negative**.")
 
@@ -77,7 +77,7 @@ with col_tips:
         st.markdown("💡 **Tips**")
         st.caption("• Write your review in English\n• Longer reviews give better predictions\n• Be honest and expressive!")
 
-# ================= ANALYSIS RESULT =================
+#ANALYSIS RESULT
 st.markdown("---")
 st.markdown('<a name="analysis-result"></a>', unsafe_allow_html=True)
 st.subheader("🔍 Analysis Result")
@@ -142,7 +142,7 @@ if st.session_state.history:
 else:
     st.info("Submit a review above to see the sentiment analysis result.")
 
-# ================= RECENT REVIEWS HISTORY =================
+# RECENT REVIEWS HISTORY
 st.markdown("---")
 st.markdown('<a name="recent-reviews"></a>', unsafe_allow_html=True)
 st.subheader("🕒 Recent Reviews")
