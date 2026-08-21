@@ -29,11 +29,11 @@ with st.sidebar:
     st.title("🎬 IMDb Sentiment Analyzer")
     st.markdown("---")
     
-    st.subheader("🧭 Navigation")
+    st.subheader("Navigation")
     st.markdown("""
-    - [🏠 Home](#imdb-movie-review-sentiment-analysis)
-    - [📊 Dashboard](#analysis-result)
-    - [🕒 History](#recent-reviews)
+    - [Home](#imdb-movie-review-sentiment-analysis)
+    - [Dashboard](#analysis-result)
+    - [History](#recent-reviews)
     """)
     
     st.markdown("---")
@@ -44,7 +44,7 @@ with st.sidebar:
     )
     
     st.markdown("---")
-    st.subheader("⚙️ Model Info")
+    st.subheader("Model Info")
     st.markdown("""
     - **Model:** SimpleRNN
     - **Dataset:** IMDb Reviews (10,000 Vocab)
@@ -55,15 +55,13 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Made with ❤️ using Streamlit")
 
-#MAIN SECTION
 st.title("IMDb Movie review Sentiment Analysis")
 st.write("Enter a movie review to classify it as **Positive** or **Negative**.")
 
-# Input Layout (Text area on left, Tips on right)
 col_input, col_tips = st.columns([3, 1], gap="medium")
 
 with col_input:
-    st.subheader("✍️ Write a movie review")
+    st.subheader(" Write a movie review")
     user_input = st.text_area(
         label="Write a movie review",
         placeholder="e.g., The cinematography was breathtaking and the acting was top notch!",
@@ -77,7 +75,6 @@ with col_tips:
         st.markdown("💡 **Tips**")
         st.caption("• Write your review in English\n• Longer reviews give better predictions\n• Be honest and expressive!")
 
-#ANALYSIS RESULT
 st.markdown("---")
 st.markdown('<a name="analysis-result"></a>', unsafe_allow_html=True)
 st.subheader("🔍 Analysis Result")
@@ -87,11 +84,9 @@ if button:
         with st.spinner("Analyzing sentiment..."):
             sentiment, prediction_score = predict_sentiment(model=model, review=user_input)
             
-            # True confidence score calculation
             display_score = prediction_score if sentiment == "Positive" else (1.0 - prediction_score)
             confidence = display_score * 100
 
-            # Store in session state history (newest first)
             st.session_state.history.insert(0, {
                 "review": user_input,
                 "sentiment": sentiment,
@@ -102,7 +97,6 @@ if button:
     else:
         st.warning("Please add a review before posting")
 
-# Display Result Card if history exists
 if st.session_state.history:
     latest = st.session_state.history[0]
     is_positive = latest["sentiment"] == "Positive"
@@ -110,28 +104,24 @@ if st.session_state.history:
     with st.container(border=True):
         col_icon, col_sentiment, col_score, col_meter = st.columns([1, 2, 2, 3], vertical_alignment="center")
         
-        # 1. Smiley Emoji
         with col_icon:
             if is_positive:
                 st.markdown("<div style='font-size: 50px; text-align: center;'>🟢 😊</div>", unsafe_allow_html=True)
             else:
                 st.markdown("<div style='font-size: 50px; text-align: center;'>🔴 😞</div>", unsafe_allow_html=True)
         
-        # 2. Sentiment Label
         with col_sentiment:
             st.markdown(f"### {latest['sentiment']} Review")
             st.caption(f"Predicted class: **{latest['sentiment'].upper()}**")
         
-        # 3. Confidence Text
         with col_score:
             st.caption("Confidence Score")
             st.markdown(f"## {latest['confidence']}")
             if float(latest['score_raw']) >= 0.75:
-                st.caption("High Confidence ⭐")
+                st.caption("High Confidence")
             else:
                 st.caption("Moderate Confidence")
                 
-        # 4. Animated Confidence Progress Meter
         with col_meter:
             st.caption("Confidence Meter")
             progress_bar = st.progress(0.0)
@@ -142,20 +132,17 @@ if st.session_state.history:
 else:
     st.info("Submit a review above to see the sentiment analysis result.")
 
-# recent review history
 st.markdown("---")
 st.markdown('<a name="recent-reviews"></a>', unsafe_allow_html=True)
 st.subheader("🕒 Recent Reviews")
 
 if st.session_state.history:
-    # Table Header
     h1, h2, h3 = st.columns([6, 2, 2])
     h1.markdown("**Review**")
     h2.markdown("**Prediction**")
     h3.markdown("**Confidence**")
     st.divider()
     
-    # List each review in history
     for item in st.session_state.history:
         r1, r2, r3 = st.columns([6, 2, 2])
         r1.write(f"\"{item['review']}\"")
